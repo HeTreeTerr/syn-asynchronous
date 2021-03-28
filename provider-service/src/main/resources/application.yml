@@ -1,0 +1,7 @@
+server:
+  port: 9002
+
+myapp:
+  config:
+    synOrAsy: asy
+    fastOrSlow: fast

@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "e103ebee-4779-4a89-be7e-5da23efa6761",
+		"name": "syn&&asy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "provider",
+			"item": [
+				{
+					"name": "同步处理接口",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:9002/synSaveTheWorld?keyNo=test0006",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9002",
+							"path": [
+								"synSaveTheWorld"
+							],
+							"query": [
+								{
+									"key": "keyNo",
+									"value": "test0006"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "异步处理接口",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:9002/asySaveTheWorld?keyNo=test0005",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9002",
+							"path": [
+								"asySaveTheWorld"
+							],
+							"query": [
+								{
+									"key": "keyNo",
+									"value": "test0005"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "可配置（同/异步）处理接口",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:9002/saveTheWorld?keyNo=test0003",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9002",
+							"path": [
+								"saveTheWorld"
+							],
+							"query": [
+								{
+									"key": "keyNo",
+									"value": "test0003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查看数据列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:9002/worldInfos",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9002",
+							"path": [
+								"worldInfos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consumer",
+			"item": [
+				{
+					"name": "同步请求",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8099/synHelpTheWorld?keyNo=test0002",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8099",
+							"path": [
+								"synHelpTheWorld"
+							],
+							"query": [
+								{
+									"key": "keyNo",
+									"value": "test0002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "异步请求",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8099/asyHelpTheWorld?keyNo=test0004",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8099",
+							"path": [
+								"asyHelpTheWorld"
+							],
+							"query": [
+								{
+									"key": "keyNo",
+									"value": "test0004"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
