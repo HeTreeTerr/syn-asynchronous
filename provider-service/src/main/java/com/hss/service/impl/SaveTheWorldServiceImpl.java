@@ -10,6 +10,7 @@ import com.hss.service.SaveTheWorldService;
 import com.hss.type.FastOrSlow;
 import com.hss.type.ResponseCode;
 import com.hss.type.WorldStatus;
+import com.hss.type.WorldSubmitFlag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,8 +46,10 @@ public class SaveTheWorldServiceImpl implements SaveTheWorldService {
             World world = new World();
             //名称
             world.setKeyNo(keyNo);
+            //拯救状态
+            world.setStatus(WorldStatus.success.getCode());
             //状态【通知消费者】
-            world.setStatus(WorldStatus.noticeSuccess.getCode());
+            world.setSubmitFlag(WorldSubmitFlag.noticeSuccess.getCode());
             //时间
             world.setActionTime(new Date());
             //添加到注册表
@@ -62,8 +65,10 @@ public class SaveTheWorldServiceImpl implements SaveTheWorldService {
         World world = new World();
         //名称
         world.setKeyNo(keyNo);
-        //状态【受理成功】
-        world.setStatus(WorldStatus.accper.getCode());
+        //状态【待处理】
+        world.setStatus(WorldStatus.wait.getCode());
+        //通知标识【受理成功】
+        world.setSubmitFlag(WorldSubmitFlag.accper.getCode());
         //时间
         world.setActionTime(new Date());
         //添加到注册表

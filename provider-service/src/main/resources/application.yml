@@ -3,5 +3,9 @@ server:
 
 myapp:
   config:
+    #取决于消费者同步还是异步[消费者同步，所有操作必须同步；消费者异步，有配置和补偿空间]
     synOrAsy: asy
-    fastOrSlow: fast
+    #消费者接受异步，但不想等待太长的时间。
+    fastOrSlow: slow
+    #核心逻辑处理可能需要请求第三方服务，第三方服务是同步还是异步
+    coreSynOrAsy: syn

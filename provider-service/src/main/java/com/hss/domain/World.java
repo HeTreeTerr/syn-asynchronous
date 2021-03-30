@@ -11,10 +11,12 @@ import java.util.Date;
  */
 @Data
 public class World {
-
+    /** 编号 */
     private String keyNo;
-
+    /** 处理状态 */
     private Integer status;
+    /** 通知标识 */
+    private Integer submitFlag;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")

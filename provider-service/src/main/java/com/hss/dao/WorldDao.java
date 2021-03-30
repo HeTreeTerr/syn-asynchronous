@@ -32,13 +32,14 @@ public class WorldDao {
     }
 
     //修改
-    public void update(String keyNo,Integer status){
+    public void update(String keyNo,Integer status,Integer submitFlag){
         List<World> worldList = worldRegistryTable.getWorldList();
         for (int i = 0; i < worldList.size(); i++) {
             //根据keyNo查询并唯一确认记录
             World world = worldList.get(i);
             if(world.getKeyNo().equals(keyNo)){
                 world.setStatus(status);
+                world.setSubmitFlag(submitFlag);
             }
         }
     }
@@ -49,15 +50,15 @@ public class WorldDao {
         return worldList;
     }
 
-    //由状态查询
-    public List<World> findListByStatue(Integer status){
+    //由通知标识查询
+    public List<World> findListBySubmitFlag(Integer submitFlag){
         List<World> worldList = worldRegistryTable.getWorldList();
-        List<World> worldListByStatue = new ArrayList<>();
+        List<World> worldListBySubmitFlag = new ArrayList<>();
         for(World world : worldList){
-            if(status == world.getStatus()){
-                worldListByStatue.add(world);
+            if(submitFlag == world.getSubmitFlag()){
+                worldListBySubmitFlag.add(world);
             }
         }
-        return worldListByStatue;
+        return worldListBySubmitFlag;
     }
 }
