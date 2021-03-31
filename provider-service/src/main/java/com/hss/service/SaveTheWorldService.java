@@ -24,5 +24,5 @@ public interface SaveTheWorldService {
      * @param keyNo
      * @return
      */
-    Boolean resultNotice(String keyNo);
+    Boolean resultNotice(String keyNo,Integer status);
 }

@@ -4,11 +4,15 @@ import com.hss.dao.WorldDao;
 import com.hss.domain.World;
 import com.hss.service.ActionSaveService;
 import com.hss.service.SaveTheWorldService;
+import com.hss.type.SynOrAsy;
 import com.hss.type.WorldStatus;
 import com.hss.type.WorldSubmitFlag;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -29,6 +33,9 @@ public class MessageNotice implements Runnable {
     @Autowired
     private ActionSaveService actionSaveService;
 
+    @Value("${myapp.config.coreSynOrAsy}")
+    private String coreSynOrAsy;
+
     private String keyNo;
 
     @Override
@@ -38,20 +45,24 @@ public class MessageNotice implements Runnable {
         for(World world : worldList){
             if(keyNo.equals(world.getKeyNo())){
                 //核心业务逻辑处理
-                Boolean res = actionSaveService.actionSaveWorld(keyNo);
-                if(res){
-                    Integer status = WorldStatus.success.getCode();
-                    //通知消费者处理结果
-                    Boolean noticeRes = saveTheWorldService.resultNotice(world.getKeyNo());
-                    Integer submitFlag = null;
-                    if(noticeRes){//通知消费者成功
-                        submitFlag = WorldSubmitFlag.noticeSuccess.getCode();
-                    }else{//逻辑处理成功
-                        submitFlag = WorldSubmitFlag.actionSuccess.getCode();
+                Pair<Boolean,Object> pair = actionSaveService.actionSaveWorld(keyNo);
+                if(pair.getKey()){
+                    Integer status = WorldStatus.wait.getCode();
+                    Integer submitFlag = WorldSubmitFlag.actionSuccess.getCode();
+                    if(coreSynOrAsy.equals(SynOrAsy.SYN.getName())) {//逻辑处理同步
+                        //判断处理结果
+                        status = Integer.valueOf(pair.getValue().toString());
+                        if(StringUtils.isEmpty(status)){
+                            throw new RuntimeException("逻辑处理异常");
+                        }
+                        //通知消费者处理结果
+                        Boolean noticeRes = saveTheWorldService.resultNotice(world.getKeyNo(),status);
+                        if(noticeRes){//通知消费者成功
+                            submitFlag = WorldSubmitFlag.noticeSuccess.getCode();
+                        }
                     }
                     //修改通知标识（处理成功）
                     worldDao.update(world.getKeyNo(),status,submitFlag);
-
                 }
             }
         }

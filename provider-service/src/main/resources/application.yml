@@ -8,4 +8,4 @@ myapp:
     #消费者接受异步，但不想等待太长的时间。
     fastOrSlow: slow
     #核心逻辑处理可能需要请求第三方服务，第三方服务是同步还是异步
-    coreSynOrAsy: syn
+    coreSynOrAsy: asy

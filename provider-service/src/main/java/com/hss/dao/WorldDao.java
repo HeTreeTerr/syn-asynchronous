@@ -2,6 +2,7 @@ package com.hss.dao;
 
 import com.hss.domain.World;
 import com.hss.table.WorldRegistryTable;
+import com.hss.type.WorldStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

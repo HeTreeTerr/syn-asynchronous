@@ -1,13 +1,24 @@
 package com.hss.service;
 
-import com.hss.util.PairUtil;
+
+import javafx.util.Pair;
 
 /**
  * 执行保护接口
  */
 public interface ActionSaveService {
 
-    Boolean actionSaveWorld(String worldName);
+    /**
+     * 在本服务上的逻辑处理，只需要返回true或false
+     * @param worldName
+     * @return
+     */
+    //Boolean actionSaveWorld(String worldName);
 
-    PairUtil actionSaveWorldAsy(String worldName);
+    /**
+     * 请求第三方
+     * @param worldName
+     * @return
+     */
+    Pair<Boolean,Object> actionSaveWorld(String worldName);
 }

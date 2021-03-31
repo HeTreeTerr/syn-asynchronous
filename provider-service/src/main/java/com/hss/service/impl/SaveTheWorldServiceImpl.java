@@ -11,10 +11,12 @@ import com.hss.type.FastOrSlow;
 import com.hss.type.ResponseCode;
 import com.hss.type.WorldStatus;
 import com.hss.type.WorldSubmitFlag;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
@@ -41,13 +43,19 @@ public class SaveTheWorldServiceImpl implements SaveTheWorldService {
     @Override
     public String synSaveTheWorld(String keyNo) {
         //执行保护逻辑
-        Boolean res = actionSaveService.actionSaveWorld(keyNo);
-        if(res){
+        Pair<Boolean,Object> pair = actionSaveService.actionSaveWorld(keyNo);
+        //判断请求结果
+        if(pair.getKey()){
+            //判断处理结果
+            Integer status = Integer.valueOf(pair.getValue().toString());
+            if(StringUtils.isEmpty(status)){
+                throw new RuntimeException("逻辑处理异常");
+            }
             World world = new World();
             //名称
             world.setKeyNo(keyNo);
             //拯救状态
-            world.setStatus(WorldStatus.success.getCode());
+            world.setStatus(status);
             //状态【通知消费者】
             world.setSubmitFlag(WorldSubmitFlag.noticeSuccess.getCode());
             //时间
@@ -84,8 +92,8 @@ public class SaveTheWorldServiceImpl implements SaveTheWorldService {
     }
 
     @Override
-    public Boolean resultNotice(String keyNo) {
-        String forObject = restTemplate.getForObject("http://127.0.0.1:8099/saveTheWorldResultNotice?keyNo=" + keyNo, String.class);
+    public Boolean resultNotice(String keyNo,Integer status) {
+        String forObject = restTemplate.getForObject("http://127.0.0.1:8099/saveTheWorldResultNotice?keyNo=" + keyNo +"&status=" + status, String.class);
         JSONObject jsonObject = JSON.parseObject(forObject);
         Integer code = jsonObject.getInteger("code");
         if(ResponseCode.success.getCode().equals(code)){

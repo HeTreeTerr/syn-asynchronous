@@ -67,12 +67,13 @@ public class HelpCenterController {
      * @return
      */
     @RequestMapping(value = "/saveTheWorldResultNotice")
-    public Msg saveTheWorldResultNotice(@RequestParam(value = "keyNo") String keyNo){
-        log.info("提供者通知消费者{}处理成功",keyNo);
+    public Msg saveTheWorldResultNotice(@RequestParam(value = "keyNo") String keyNo,
+                                        @RequestParam(value = "status") String status){
+        log.info("提供者通知消费者{}处理{}",keyNo,status);
         //模拟消费者接收结果失败
         /*if(!false){
             return Msg.fail();
         }*/
-        return Msg.success().add("resultMessage","提供者通知消费者"+ keyNo +"处理成功");
+        return Msg.success().add("resultMessage","提供者通知消费者"+ keyNo +"处理" + status);
     }
 }

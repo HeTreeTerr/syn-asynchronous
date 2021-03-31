@@ -1,8 +1,10 @@
 package com.hss.service.impl;
 
 import com.hss.service.ActionSaveService;
-import com.hss.util.PairUtil;
+import com.hss.type.SynOrAsy;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -14,7 +16,14 @@ import java.util.Map;
 @Service
 @Slf4j
 public class ActionSaveServiceImpl implements ActionSaveService {
-    @Override
+
+    @Value("${myapp.config.synOrAsy}")
+    private String synOrAsy;
+
+    @Value("${myapp.config.coreSynOrAsy}")
+    private String coreSynOrAsy;
+
+    /*@Override
     public Boolean actionSaveWorld(String worldName) {
         log.info("核心逻辑处理：拯救{}！",worldName);
         try {
@@ -24,22 +33,27 @@ public class ActionSaveServiceImpl implements ActionSaveService {
             e.printStackTrace();
         }
         return true;
-    }
+    }*/
 
     @Override
-    public PairUtil actionSaveWorldAsy(String worldName) {
+    public Pair<Boolean,Object> actionSaveWorld(String worldName) {
         log.info("核心逻辑处理：拯救{}！",worldName);
-        PairUtil pairUtil = new PairUtil();
         try {
             //模拟处理耗时3秒
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Map<String,Object> map = new HashMap();
-        map.put("status",1);
-        pairUtil.setFirst(true);
-        pairUtil.setSecond(map);
-        return pairUtil;
+        //逻辑处理同步
+        if(coreSynOrAsy.equals(SynOrAsy.SYN.getName())){
+            Integer status = 1;
+            //key是true代表请求成功，tatus代表处理结果
+            return new Pair(true,status);
+        }else if(synOrAsy.equals(SynOrAsy.ASY.getName()) && coreSynOrAsy.equals(SynOrAsy.ASY.getName())){//逻辑处理异步
+            //key是true代表请求成功，status代表处理结果
+            return new Pair(true,null);
+        }else {
+            throw new RuntimeException("同步/异步配置异常");
+        }
     }
 }
