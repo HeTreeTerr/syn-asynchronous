@@ -49,7 +49,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "127.0.0.1:9002/asySaveTheWorld?keyNo=test0005",
+							"raw": "127.0.0.1:9002/asySaveTheWorld?keyNo=test0004",
 							"host": [
 								"127",
 								"0",
@@ -63,7 +63,7 @@
 							"query": [
 								{
 									"key": "keyNo",
-									"value": "test0005"
+									"value": "test0004"
 								}
 							]
 						}
@@ -125,6 +125,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "异步返回逻辑处理结果",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:9002/resNotice?keyNo=test0001&status=2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9002",
+							"path": [
+								"resNotice"
+							],
+							"query": [
+								{
+									"key": "keyNo",
+									"value": "test0001"
+								},
+								{
+									"key": "status",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -141,7 +176,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "127.0.0.1:8099/synHelpTheWorld?keyNo=test0002",
+							"raw": "127.0.0.1:8099/synHelpTheWorld?keyNo=test0003",
 							"host": [
 								"127",
 								"0",
@@ -155,7 +190,7 @@
 							"query": [
 								{
 									"key": "keyNo",
-									"value": "test0002"
+									"value": "test0003"
 								}
 							]
 						}
