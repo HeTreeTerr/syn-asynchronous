@@ -73,7 +73,7 @@ public class SubmitTask {
      */
     @Scheduled(cron = "0/10 * * * * ?")
     public void noticeConsumerSaveResultTask(){
-        if(synOrAsy.equals(SynOrAsy.ASY.getName())){//异步
+        if(synOrAsy.equals(SynOrAsy.ASY.getName())){//消费者异步
             log.info("=====异步通知消费者处理结果start====");
             List<World> worldList = worldDao.findListBySubmitFlag(WorldSubmitFlag.actionSuccess.getCode());
             for(World world : worldList){
