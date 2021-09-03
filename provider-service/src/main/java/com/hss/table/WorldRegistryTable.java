@@ -3,8 +3,8 @@ package com.hss.table;
 import com.hss.domain.World;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 世界注册信息表
@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class WorldRegistryTable {
 
-    private List<World> worldList = new ArrayList<>();
+    private List<World> worldList = new Vector<>();
 
     public List<World> getWorldList() {
         return worldList;
